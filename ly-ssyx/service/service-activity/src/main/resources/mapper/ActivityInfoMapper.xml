@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.ssyxsystem.activity.mapper.ActivityInfoMapper">
+
+    <select id="selectSkuIdListExist" resultType="java.lang.Long">
+        select sku_id
+        from activity_sku sku
+        inner join activity_info info
+        where sku.activity_id = info.id
+        <if test="#{skuIdList} != null">
+            and
+            sku.id in
+            <foreach collection="skuIdList" separator="," open="("
+                     close=")"
+                     item="skuId">
+                #{skuId}
+            </foreach>
+        </if>
+        and
+        NOW() BETWEEN info.start_time and info.end_time
+    </select>
+
+
+    <select id="findActivityRule" resultType="com.ly.ssyxsystem.model.activity.ActivityRule">
+        select info.activity_type as activityType,
+               rule.id,
+               rule.activity_id,
+               rule.condition_amount,
+               rule.condition_num,
+               rule.benefit_amount,
+               rule.benefit_discount
+        from activity_info info
+                 inner join activity_sku sku on info.id = sku.activity_id
+                 inner join activity_rule rule on info.id = rule.activity_id
+        where sku.sku_id = #{skuId}
+          and now() between info.start_time and info.end_time
+        order by rule.condition_amount desc
+    </select>
+    <select id="selectCartActivity" resultType="com.ly.ssyxsystem.model.activity.ActivitySku">
+        select
+        info.id as activityId,
+        sku.sku_id as skuId
+        from activity_info info
+        inner join activity_sku sku on info.id = sku.activity_id
+        <where>
+            and sku.sku_id in
+            <foreach collection="skuIdList" open="(" close=")" item="skuId" separator=",">
+                #{skuId}
+            </foreach>
+            and now() between info.start_time and info.end_time
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,34 @@
+server:
+  port: 8204
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+spring:
+  rabbitmq:
+    publisher-confirm-type: CORRELATED  #发布确认模式，消息是否被成功发送到交换机
+    publisher-returns: true
+    virtual-host: /plus
+    host: 192.168.248.143
+    port: 5672
+    username: admin
+    password: 123456
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 1 # 每次从消息队列中取出的消息数
+        concurrency: 3 # 一次最多消费3条消息，并发能力，一次并发处理多少条消息
+  redis:
+    host: 192.168.248.143
+    port: 6379
+    database: 0
+    timeout: 1800000
+    password: "031119"
+    lettuce:
+      pool:
+        max-active: 20 #最大连接数
+        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
+        max-idle: 5    #最大空闲
+        min-idle: 0     #最小空闲
+sku:
+  index:
+    skues

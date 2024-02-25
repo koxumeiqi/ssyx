@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.ssyxsystem.product.mapper.SkuInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ly.ssyxsystem.model.product.SkuInfo">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="attrGroupId" column="attr_group_id" jdbcType="BIGINT"/>
+        <result property="skuType" column="sku_type" jdbcType="TINYINT"/>
+        <result property="skuName" column="sku_name" jdbcType="VARCHAR"/>
+        <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
+        <result property="perLimit" column="per_limit" jdbcType="INTEGER"/>
+        <result property="publishStatus" column="publish_status" jdbcType="TINYINT"/>
+        <result property="checkStatus" column="check_status" jdbcType="TINYINT"/>
+        <result property="isNewPerson" column="is_new_person" jdbcType="TINYINT"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="skuCode" column="sku_code" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="marketPrice" column="market_price" jdbcType="DECIMAL"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="lockStock" column="lock_stock" jdbcType="INTEGER"/>
+        <result property="lowStock" column="low_stock" jdbcType="INTEGER"/>
+        <result property="sale" column="sale" jdbcType="INTEGER"/>
+        <result property="wareId" column="ware_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,category_id,attr_group_id,
+        sku_type,sku_name,img_url,
+        per_limit,publish_status,check_status,
+        is_new_person,sort,sku_code,
+        price,market_price,stock,
+        lock_stock,low_stock,sale,
+        ware_id,create_time,
+        update_time,is_deleted
+    </sql>
+    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into sku_info(
+        <trim suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="attrGroupId != null">
+                attr_group_id,
+            </if>
+            <if test="skuType != null">
+                sku_type,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="perLimit != null">
+                per_limit,
+            </if>
+            <if test="publishStatus != null">
+                publish_status,
+            </if>
+            <if test="checkStatus != null">
+                check_status,
+            </if>
+            <if test="isNewPerson != null">
+                is_new_person,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="lockStock!= null">
+                lock_stock,
+            </if>
+            <if test="lowStock!= null">
+                low_stock,
+            </if>
+            <if test="sale!= null">
+                sale,
+            </if>
+            <if test="wareId!= null">
+                ware_id,
+            </if>
+            <if test="createTime!= null">
+                create_time,
+            </if>
+            <if test="updateTime!= null">
+                update_time,
+            </if>
+            <if test="isDeleted!= null">
+                is_deleted,
+            </if>
+        </trim>
+        )
+        values(
+        <trim suffixOverrides=",">
+            <if test="categoryId!= null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="attrGroupId!= null">
+                #{attrGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="skuType!= null">
+                #{skuType,jdbcType=TINYINT},
+            </if>
+            <if test="skuName!= null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl!= null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="perLimit!= null">
+                #{perLimit,jdbcType=INTEGER},
+            </if>
+            <if test="publishStatus!= null">
+                #{publishStatus,jdbcType=TINYINT},
+            </if>
+            <if test="checkStatus!= null">
+                #{checkStatus,jdbcType=TINYINT},
+            </if>
+            <if test="isNewPerson!= null">
+                #{isNewPerson,jdbcType=TINYINT},
+            </if>
+            <if test="sort!= null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode!= null">
+                #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="price!= null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="marketPrice!= null">
+                #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stock!= null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="lockStock!= null">
+                #{lockStock,jdbcType=INTEGER},
+            </if>
+            <if test="lowStock!= null">
+                #{lowStock,jdbcType=INTEGER},
+            </if>
+            <if test="sale!= null">
+                #{sale,jdbcType=INTEGER},
+            </if>
+            <if test="wareId!= null">
+                #{wareId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime!= null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime!= null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted!= null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+        )
+    </insert>
+    <update id="lockStock">
+        update sku_info
+        set lock_stock = lock_stock + #{skuNum}
+        where id = #{skuId}
+    </update>
+    <update id="unLockStock">
+        update sku_info
+        set lock_stock = lock_stock - #{skuNum}
+        where id = #{skuId}
+    </update>
+    <update id="minusStock">
+        update sku_info
+        set stock      = stock - #{skuNum},
+            lock_stock = lock_stock - #{skuNum},
+            sale       = sale + #{skuNum}
+        where id = #{skuId}
+    </update>
+    <select id="checkStock" resultType="com.ly.ssyxsystem.model.product.SkuInfo">
+        select id,
+               category_id,
+               sku_type,
+               sku_name,
+               img_url,
+               per_limit,
+               publish_status,
+               check_status,
+               is_new_person,
+               sort,
+               sku_code,
+               price,
+               market_price,
+               stock,
+               lock_stock,
+               low_stock,
+               sale,
+               ware_id,
+               create_time,
+               update_time,
+               is_deleted
+        from sku_info
+        where id = #{skuId}
+          and stock - lock_stock >= #{skuNum} for update
+    </select>
+</mapper>
